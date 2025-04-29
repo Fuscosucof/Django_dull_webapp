@@ -8,15 +8,20 @@ $$1) article model มีattr :title body date author(Foreignkey)
 $$2) ทำให้ Show article ในadmin มีlist_display เเต่ละ attr
 $$3) ทำ ListView DetailView ปล. list ของmodel คือ ชื่อ model ตัวพิมเล็ก_list
 model = Article ดังนั้น model_list = article_list
-4) ใส่ <a></a> สำหรับ edit delete ไว้เปล่าๆก่อน
+$$4) ใส่ <a></a> สำหรับ edit delete ไว้เปล่าๆก่อน
 $$5)  UpdateView DeleteView จาก django.views.generic.edit
 - UpdateView ใส่ fields ที่ต้องการที่จะให้updateได้
 - DeleteView ใส่ success_url = reverse_lazy ("url name") ไว้ด้วย
-6) Template ของเเต่ละอัน ใช้ {{object.}} หรือ {{article.}} dHwfh
+$$6) Template ของเเต่ละอัน ใช้ {{object.}} หรือ {{article.}} dHwfh
 ุุุ- template ของ edit มี {{form}} build in เหมือนเดิม
 - template ของ delete ไม่ต้องมี {{form}} นะถถถ มีเเค่<form action='' method='post'><button></button></form>
-7) กลับไปใส่ชื่อ url ของ edit กับ delete {% url 'name' article.pk %}
-8) ทำ CreateView ระบุ fields เเล้วทำtemplate เเล้วใส่ชื่อ url ใน base.html
+$$7) กลับไปใส่ชื่อ url ของ edit กับ delete {% url 'name' article.pk %}
+$$8) ทำ CreateView ระบุ fields เเล้วทำtemplate เเล้วใส่ชื่อ url ใน base.html
 ละก็ link ไปหน้า listview จากหน้า home
 
-Permission ในการ CRUD
+Comments routemap
+1) model article เป็น foreignkey() first argument = model second argument = on_delete
+เเละ author ของ comment เป็น foreignkey ด้วย
+2) เอาลง admin
+3) ทำให้ comment อยู่ในส่วนของ article เลย ไม่เเยก ในweb admin
+โดย ทำclass admin.StackedInline หรือ admin.TabularInline ระบุ model กับ extra blank line
