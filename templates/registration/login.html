@@ -9,4 +9,6 @@ Log In
     {{ form }}
     <button type="submit">Login</button>
 </form>
+<a href="{% url 'password_change' %}">Change Password</a>
+<a href="{% url 'password_reset' %}">Forgot Password?</a>
 {% endblock content %}

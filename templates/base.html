@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rabye Tuuk</title>
+    {% if user.is_authenticated %}
+    <header>YO {{user.username}}</header>
+    <div><a href="{% url 'article_new' %}">Add new article</a>
+         <a href="{% url 'article_list' %}">Articles</a></div>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
+    <a href="{% url 'password_change' %}">Change Password</a>
+    {% else %}
+        <a href="{% url 'login' %}">Log In</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'password_change' %}">Change Password</a>
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+    {% endif %}
+    
 </head>
 <body>
     
