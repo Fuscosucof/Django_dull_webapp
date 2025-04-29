@@ -1,23 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div><h1>{{article.title}}</h1> by <h3>{{article.author}} | published {{article.date}}</h3>
-    <h2>{{article.body}}</h2>
+<article class="article-card">
+    <h1 class="article-title">{{article.title}}</h1>
+    <p class="article-meta">by {{article.author}} | published {{article.date}}</p>
+    <div class="article-body">{{article.body}}</div>
 
     {% if article.author.pk == request.user.pk %}
-    <a href="{% url 'article_edit' article.pk %}">Edit</a> | <a href="{% url 'article_delete' article.pk %}">Delete</a>
+        <a href="{% url 'article_edit' article.pk %}" class="button button-primary">Edit</a>
+        <a href="{% url 'article_delete' article.pk %}" class="button button-danger">Delete</a>
     {% endif %}
-</div>
-{% for comment in article.comment_set.all %}
-    <div>{{comment.context}} | {{comment.author}}</div>
-{% endfor %}
 
-<div><h4>Add Your Comment</h4>
-    <form action="" method="post">{% csrf_token %}
-        {{form}}
-    <button type="submit">Add new Comment</button>
+    <div class="comment-section">
+        <h3>Comments</h3>
+        {% for comment in article.comment_set.all %}
+            <div class="comment-card">
+                {{comment.context}} | {{comment.author}}
+            </div>
+        {% endfor %}
 
-    </form></div>
-
-
+        <div class="form-group">
+            <h4>Add Your Comment</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="button button-primary">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+</article>
 {% endblock content %}

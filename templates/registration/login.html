@@ -1,14 +1,17 @@
 {% extends "base.html" %}
-{% block title %}
-Log In
-{% endblock title %}
 
 {% block content %}
-<div><h1>LOGIN</h1></div>
-<form method ="post">{% csrf_token %}
-    {{ form }}
-    <button type="submit">Login</button>
-</form>
-<a href="{% url 'password_change' %}">Change Password</a>
-<a href="{% url 'password_reset' %}">Forgot Password?</a>
+<div class="form-container">
+    <h1 class="page-title">Log In</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            {{ form.as_p }}
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="button button-primary">Log In</button>
+        </div>
+    </form>
+    <a href="{% url 'password_reset' %}" class="form-link">Forgot Password?</a>
+</div>
 {% endblock content %}

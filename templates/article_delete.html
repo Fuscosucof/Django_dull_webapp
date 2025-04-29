@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Are you surely wanna delete {{article.title}}</h1>
-<form action="" method="post">{% csrf_token %}
-<button type="submit">Delete</button>
-</form>
-
+<div class="form-container">
+    <h1 class="page-title warning-text">Delete Article</h1>
+    <p class="warning-text">Are you sure you want to delete "{{article.title}}"?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="button button-danger">Delete</button>
+            <a href="{% url 'article_list' %}" class="button button-primary">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock content %}

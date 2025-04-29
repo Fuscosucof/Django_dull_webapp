@@ -4,32 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rabye Tuuk</title>
-    {% if user.is_authenticated %}
-    <header>YO {{user.username}}</header>
-    <div><a href="{% url 'article_new' %}">Add new article</a>
-         <a href="{% url 'article_list' %}">Articles</a></div>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Log Out</button>
-    </form>
-    <a href="{% url 'password_change' %}">Change Password</a>
-    {% else %}
-        <a href="{% url 'login' %}">Log In</a>
-        <a href="{% url 'signup' %}">Sign Up</a>
-        <a href="{% url 'password_change' %}">Change Password</a>
-        <a href="{% url 'password_reset' %}">Forgot Password?</a>
-    {% endif %}
-    
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    
-{% block content %}
-
-{% endblock content %}
-
-
-
-
-
+    <nav class="nav-header">
+        {% if user.is_authenticated %}
+            <span class="nav-greeting">YO {{user.username}}</span>
+            <a href="{% url 'article_new' %}" class="nav-link button button-primary">Add new article</a>
+            <a href="{% url 'article_list' %}" class="nav-link">Articles</a>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="button button-danger">Log Out</button>
+            </form>
+            <a href="{% url 'password_change' %}" class="nav-link">Change Password</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">Log In</a>
+            <a href="{% url 'signup' %}" class="nav-link">Sign Up</a>
+            <a href="{% url 'password_reset' %}" class="nav-link">Forgot Password?</a>
+        {% endif %}
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
 </body>
 </html>
