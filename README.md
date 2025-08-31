@@ -1,4 +1,4 @@
-# Rabye_Tuuk
+# Django webapp
 
 article apps routemap
 
